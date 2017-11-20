@@ -1,29 +1,38 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
+
+
+//import app and components
 import App from './App';
 import './index.css';
-import Seats from './seats/seats_index';
-import Staff from './staff/staff_index';
-import Projects from './projects/projects_index';
 import LoginForm from './authentication/login_component';
 import LoginRequiredContainer from './authentication/login_required_container';
+import { Editor } from './editor/editor_index';
+
+//set up REDUX
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './reducers_index';
 import thunk from 'redux-thunk'
+import rootReducer from './reducers_index';
+
+//replace with sagas
+// import createSagaMiddleware from 'redux-saga'
 import {  Router, Route, IndexRoute, Link, hashHistory  } from 'react-router';
-import { enableBatching} from 'redux-batched-actions';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
-export const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
-  ));
+const store = createStore(
+  rootReducer,
+  // initial state
+  applyMiddleware(thunk)
+)
+
+// then run the saga
 
 window.store =  store
 
-// console.log(store.getState())
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
@@ -31,9 +40,7 @@ ReactDOM.render(
         <Route path='login' component={LoginForm}/>
       
         <Route component={LoginRequiredContainer}>
-          <Route path='seats' component={Seats}/>
-          <Route path='staff' component={Staff}/>
-          <Route path='projects' component={Projects}/>
+          <Route path='editor' component={Editor}/>
         </Route>
       </Route>
     </Router>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import {Navbar, NavItem, Nav } from 'react-bootstrap';
-import SeatMap  from './seats/seats_map';
-import UnallocatedTable  from './seats/seats_unallocated_table';
 import './App.css';
 import {Link} from 'react-router'
 import {LinkContainer} from 'react-router-bootstrap'
@@ -11,14 +9,8 @@ import {connect}  from 'react-redux';
 const LoggedInNav = (props)=>{
   return(
     <Nav pullRight>
-      <LinkContainer to={{ pathname: '/seats'}}>
+      <LinkContainer to={{ pathname: '/editor'}}>
         <NavItem>seats</NavItem>
-      </LinkContainer>
-      <LinkContainer to={{ pathname: '/staff'}}>
-        <NavItem>staff</NavItem>
-      </LinkContainer>
-      <LinkContainer to={{ pathname: '/projects'}}>
-        <NavItem>projects</NavItem>
       </LinkContainer>
     </Nav>
   )

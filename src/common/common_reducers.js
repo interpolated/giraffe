@@ -1,22 +1,22 @@
-import * as types from './common_actions'
-import {staffInfo} from '../assets/staff_list'
 import {merge} from 'lodash'
+import {SET_ACTIVE_SECTION,SET_ACTIVE_SECTION_TYPE} from './common_actions'
 
-export function updateStaffInfo(state = {name:'',title:'',deskId:''}, action){
+
+// reduxCrud reducers set up in reducers_index
+
+//set active reducers
+export function setActiveSection(state='', action){
   switch(action.type){
-  case types.UPDATE_STAFF_INFO:
-        return merge(state,{[action.staffId]: action.payload})
-  case types.UPDATE_ALL_STAFF_INFO:
-        return action.payload
-  default:
-    return state
+    case SET_ACTIVE_SECTION:
+      return action.payload 
+    default:
+     return state
   }
 }
 
-
-export function setActiveStaffId(state='', action){
+export function setActiveSectionType(state='', action){
   switch(action.type){
-    case types.SET_ACTIVE_STAFF_ID:
+    case SET_ACTIVE_SECTION_TYPE:
       return action.payload 
     default:
      return state
