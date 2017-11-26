@@ -8,9 +8,17 @@ import R from 'ramda'
 
 export const sectionActionCreators = reduxCrud.actionCreatorsFor('sections')
 export const sectionTypeActionCreators = reduxCrud.actionCreatorsFor('sectionTypes')
+export const sectionPropsActionCreators = reduxCrud.actionCreatorsFor('sectionProps')
 
 export const SET_ACTIVE_SECTION = 'SET_ACTIVE_SECTION'
 export const SET_ACTIVE_SECTION_TYPE = 'SET_ACTIVE_SECTION_TYPE'
+
+
+// export function updateSectionType (id, data){
+//   return {
+//     type:UPDAT
+//   }
+// }
 
 
 export function setActiveSection(sectionId){
@@ -20,10 +28,9 @@ export function setActiveSection(sectionId){
     }
   }
 
-  
 export function setActiveSectionType(sectionTypeId){
     return {
-      type: SET_ACTIVE_SECTION,
+      type: SET_ACTIVE_SECTION_TYPE,
       payload: sectionTypeId
     }
   }
@@ -33,9 +40,9 @@ export function setActiveSectionType(sectionTypeId){
 // createStart - optimistic creation - need to generate unique id using cuid on key 'id'
 // createSuccess
 // createError
-// updateStart
+// updateStart - optimistic
 // updateSuccess
 // updateError
-// deleteStart
+// deleteStart - optimistic delete
 // deleteSuccess
 // deleteError

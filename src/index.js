@@ -8,7 +8,7 @@ import App from './App';
 import './index.css';
 import LoginForm from './authentication/login_component';
 import LoginRequiredContainer from './authentication/login_required_container';
-import { Editor } from './editor/editor_index';
+import Editor  from './editor/editor_index';
 
 //set up REDUX
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -22,13 +22,9 @@ import {  Router, Route, IndexRoute, Link, hashHistory  } from 'react-router';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
-const store = createStore(
-  rootReducer,
-  // initial state
+export const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
-)
-
-// then run the saga
+));
 
 window.store =  store
 
@@ -37,11 +33,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path='/' component={App}>
-        <Route path='login' component={LoginForm}/>
-      
-        <Route component={LoginRequiredContainer}>
-          <Route path='editor' component={Editor}/>
-        </Route>
+          <Route path='login' component={LoginForm}/>
+          <Route component={LoginRequiredContainer}>
+            <div>'hwat'</div>
+            <Route path='editor' component={Editor}/>
+          </Route>
       </Route>
     </Router>
   </Provider>,

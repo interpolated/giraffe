@@ -6,7 +6,7 @@ import reduxCrud from 'redux-crud';
 
 // set active - for UI and CRUD
 import {setActiveSection} from './common/common_reducers';
-import {setActiveSectionType} from './common/common_reducers';
+import {setActiveSectionType,updateSectionType} from './common/common_reducers';
 
 
 import {setRedirectUrl, toggleLoggedIn, setUserToken} from './authentication/authentication_reducers'
@@ -16,6 +16,7 @@ const rootReducer = combineReducers(
         // sections and section types
         sections:reduxCrud.Map.reducersFor('sections'),
         sectionTypes:reduxCrud.Map.reducersFor('sectionTypes'),
+        sectionProps:reduxCrud.Map.reducersFor('sectionProps'),
         
         // active section and section type
         activeSection:setActiveSection,

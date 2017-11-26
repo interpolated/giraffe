@@ -4,20 +4,24 @@ import ReactDOM from 'react-dom';
 
 import {Row,Col,ButtonGroup, Button,Container} from 'react-bootstrap'
 
-import { Viewmap } from "../viewmap/viewmap_index";
-import { Drawmap } from "../drawmap/drawmap_index";
+import  Viewmap  from "../viewmap/viewmap_index";
+import  Drawmap  from "../drawmap/drawmap_index";
+import  SectionEditor  from "../sectioneditor/sectioneditor_index";
 
 
 const Editor = (props) => {
-  return (
-    <Row>
-        <Col md='4'>
-            <Viewmap/>
-        </Col>
-        <Col md='4'>
-            <Drawmap/>
-        </Col>   
-    </Row>
+    return (
+      <div>
+        <Row>
+            <Col md={6}>
+                <Viewmap/>
+            </Col>
+            <Col md={6}>
+                <Drawmap/>
+                <SectionEditor/>
+            </Col>   
+        </Row>
+      </div>    
   )
 }
 

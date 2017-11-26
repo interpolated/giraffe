@@ -5,12 +5,15 @@ import './App.css';
 import {Link} from 'react-router'
 import {LinkContainer} from 'react-router-bootstrap'
 import {connect}  from 'react-redux';
+import Editor from './editor/editor_index'
+
+
 
 const LoggedInNav = (props)=>{
   return(
     <Nav pullRight>
       <LinkContainer to={{ pathname: '/editor'}}>
-        <NavItem>seats</NavItem>
+        <NavItem>editor</NavItem>
       </LinkContainer>
     </Nav>
   )
@@ -30,20 +33,21 @@ const NotLoggedInNav = (props)=>{
 
 
 const App = (props) =>{
+  console.log(Editor)
   return (
     <div>
       <div>
          <Navbar collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="/">Orange Juice</a>
+                <a href="/">Giraffe</a>
               </Navbar.Brand>
             </Navbar.Header>
               {props.isLoggedIn?(<LoggedInNav/>)
                 :(<NotLoggedInNav/>)}
           </Navbar>
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid" style={{verticalHeight:190}}>
         {props.children}
       </div>
     </div>

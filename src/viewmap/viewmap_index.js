@@ -19,8 +19,7 @@ import {setActiveSectionId} from '../common/common_actions'
 import ReactMap, {Layer, Source} from 'react-mapbox-gl'
 import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-import accessToken from '../constants';
-
+import {accessToken} from '../constants' 
 const style = 'mapbox://styles/mapbox/dark-v9'
 
 const Map = ReactMap({
@@ -28,7 +27,7 @@ const Map = ReactMap({
 })
 
 const mapStyle ={
-  height:'100%',
+  height:'60vh',
   width:'100%'
 }
 
@@ -44,7 +43,6 @@ class Viewmap extends Component {
     })
   }
   
-
   render () {
     return (
       <div className='halfmap'>

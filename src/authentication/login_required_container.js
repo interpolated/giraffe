@@ -11,7 +11,7 @@ class LoginRequiredContainer extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props)
+    console.log(this.props.isLoggedIn)
     if (!this.props.isLoggedIn) {
       // set the current url/path for future redirection (we use a Redux action)
       // then redirect (we use a React Router method)
