@@ -12,7 +12,7 @@ import R from 'ramda';
 import cuid from 'cuid';
 
 // import actions
-import {sectionTypeActionCreators, setActiveSectionType} from '../common/common_actions' 
+import {sectionTypeActionCreators, setActiveSectionType, sectionPropsActionCreators} from '../common/common_actions' 
 // import constants
 
 import SectionTypeList from './sectiontype_list'
@@ -160,10 +160,11 @@ class SectionEditor extends Component {
 
 
 // 
-const mapStateToProps = ( {sectionTypes,activeSectionType} ) => {
+const mapStateToProps = ( {activeSection, sectionTypes,activeSectionType} ) => {
   return {
     sectionTypes,
-    activeSectionType
+    activeSectionType,
+    activeSection
   }
 }
 

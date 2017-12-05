@@ -39,26 +39,35 @@ class SectionPropsEditor extends Component {
 
     constructor(props) {
         super(props);
+        this.state={
+          building:'',
+          rank:0,
+          floors:0
+        }
     }
 
 
     // to bind redux store to state use nextprops
     componentWillReceiveProps(nextProps){
         const activeSecProps = R.filter(R.propEq('id',nextProps.activeSection),nextProps.sectionProps)
-        if(!!nextProps.activeSection){
-            console.log(activeSec[nextProps.activeSection])
-            console.log({...activeSec[nextProps.activeSection].properties})
-              this.setState({...activeSecProps[nextProps.activeSection].properties})
-            }
-          else{
-            // this.setState({description:''})
+        if(this.props.activeSection!==nextProps.activeSection){
+          if(!!nextProps.activeSection&&typeof(activeSecProps[nextProps.activeSection])!=='undefined'){
+            console.log('gotta change!')
+            console.log(activeSecProps)
+            console.log({...activeSecProps[nextProps.activeSection]})
+            this.setState({...activeSecProps[nextProps.activeSection]})
           }
-    //   }
+          else{
+            this.setState({building:'',rank:1,floors:2})
+          }
+        }
+      }
 
     _onChange=(e)=>{
+        console.log('this changes it tooooo')
+        console.log({[e.target.id]:e.target.value})
         this.setState({[e.target.id]:e.target.value})
-        console.log(this.props.activeSection)
-        this.props.updateSectionProps({properties:this.state,id:this.props.activeSection})
+        this.props.updateSectionProps({...R.merge(this.state,{[e.target.id]:e.target.value}),id:this.props.activeSection})
     }
 
   // onChange={_onChange}
@@ -86,7 +95,7 @@ class SectionPropsEditor extends Component {
                               name='building'
                               type="text"
                               label="projectId"
-                              value={ifNullThen(this.props.sectionProps[this.props.activeSection].building,'a')}/>          
+                              value={this.state.building}/>          
                           <FieldGroup
                               // componentClass="text"
                               placeholder="Floors"
@@ -94,7 +103,7 @@ class SectionPropsEditor extends Component {
                               name='floors'
                               type="number"
                               label="projectId"
-                              value={ifNullThen(this.props.activeSection.floors,2)}/>          
+                              value={this.state.floors}/>          
                           <FieldGroup
                               // componentClass="text"
                               placeholder="Rank"
@@ -102,7 +111,7 @@ class SectionPropsEditor extends Component {
                               name='rank'
                               type="number"
                               label="projectId"
-                              value={ifNullThen(this.props.activeSection.rank,1)}/>          
+                              value={this.state.rank}/>          
                       </Col>
                   </form>
               </div>
@@ -114,10 +123,11 @@ class SectionPropsEditor extends Component {
 
 
 // 
-const mapStateToProps = ( {sectionProps,activeSection} ) => {
+const mapStateToProps = ( {sectionProps,activeSection, activeSectionType} ) => {
   return {
     sectionProps,
-    activeSection
+    activeSection,
+    activeSectionType
   }
 }
 

@@ -5,7 +5,7 @@ import {combineReducers} from 'redux';
 import reduxCrud from 'redux-crud';
 
 // set active - for UI and CRUD
-import {setActiveSection} from './common/common_reducers';
+import {setActiveSection, setCenter} from './common/common_reducers';
 import {setActiveSectionType,updateSectionType} from './common/common_reducers';
 
 
@@ -17,6 +17,7 @@ const rootReducer = combineReducers(
         sections:reduxCrud.Map.reducersFor('sections'),
         sectionTypes:reduxCrud.Map.reducersFor('sectionTypes'),
         sectionProps:reduxCrud.Map.reducersFor('sectionProps'),
+        center: setCenter,
         
         // active section and section type
         activeSection:setActiveSection,

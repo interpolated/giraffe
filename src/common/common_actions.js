@@ -12,7 +12,7 @@ export const sectionPropsActionCreators = reduxCrud.actionCreatorsFor('sectionPr
 
 export const SET_ACTIVE_SECTION = 'SET_ACTIVE_SECTION'
 export const SET_ACTIVE_SECTION_TYPE = 'SET_ACTIVE_SECTION_TYPE'
-
+export const SET_CENTER = 'SET_CENTER'
 
 // export function updateSectionType (id, data){
 //   return {
@@ -20,6 +20,13 @@ export const SET_ACTIVE_SECTION_TYPE = 'SET_ACTIVE_SECTION_TYPE'
 //   }
 // }
 
+
+export function setCenter(obj){
+  return {
+    type:SET_CENTER,
+    payload: obj
+  }
+}
 
 export function setActiveSection(sectionId){
     return {

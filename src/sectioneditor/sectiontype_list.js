@@ -12,7 +12,7 @@ import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import R from 'ramda';
 
 // import actions
-import {setActiveSectionType}  from '../common/common_actions';
+import {setActiveSectionType, sectionPropsActionCreators}  from '../common/common_actions';
 
 // import selectors 
 
@@ -20,6 +20,12 @@ import {setActiveSectionType}  from '../common/common_actions';
 class SectionTypeList extends Component  {
     
     onRowClick = (e) =>{
+        if(!!this.props.activeSection){
+          this.props.updateSectionProps({
+            ...this.props.sectionProps[this.props.activeSection],
+            sectionType:e.name, 
+            id:this.props.activeSection})
+        }
         this.props.setActiveSectionType(e.name)
     }
     
@@ -66,14 +72,21 @@ options = {
 
 
 
-const mapStateToProps = ( {sectionTypes} ) => {
+const mapStateToProps = ( {sectionTypes, activeSection, sectionProps} ) => {
   return {
-    sectionTypes
+    sectionTypes,
+    sectionProps,
+    activeSection
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({setActiveSectionType}, dispatch)
+  return bindActionCreators({
+    createSectionProps: sectionPropsActionCreators.createStart,
+    updateSectionProps:sectionPropsActionCreators.updateStart,
+    deleteSectionProps: sectionPropsActionCreators.deleteSuccess,
+    setActiveSectionType
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SectionTypeList);
