@@ -83,7 +83,6 @@ class Viewmap extends Component {
       let toList = x => R.values(x)
       let sortr = (a,b)=>{
         return parseInt(R.path(['rank'],a))-parseInt(R.path(['rank'],b))
-
       }
       const buildingMaker = R.pipe(
        sectionPropFilter,
@@ -100,7 +99,6 @@ class Viewmap extends Component {
          properties:item}}),
         )
       let featuresWithProps = buildingList.map(buildingMaker)
-      console.log({project:R.assoc('features',R.reduce(R.concat,[],featuresWithProps),{type:'FeatureCollection'})})
       return R.assoc('features',R.reduce(R.concat,[],featuresWithProps),{type:'FeatureCollection'})
       }
   
