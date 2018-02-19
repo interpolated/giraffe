@@ -1,7 +1,4 @@
-import {merge} from 'lodash'
 import {SET_ACTIVE_SECTION,SET_ACTIVE_SECTION_TYPE, SET_CENTER} from './common_actions'
-
-
 // reduxCrud reducers set up in reducers_index
 
 //set active reducers

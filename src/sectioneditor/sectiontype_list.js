@@ -36,6 +36,7 @@ options = {
 
   // console.log(denormalizedData.users)
   render (){ 
+    console.log(R.values(this.props.sectionTypes))
     return(
       <div>
         <div>
@@ -56,7 +57,7 @@ options = {
             marginLeft: -10,
           } }
 
-          data={Object.values(Object.values(this.props.sectionTypes))} 
+          data={R.values(this.props.sectionTypes)} 
           options = {this.options}
           hover
           striped

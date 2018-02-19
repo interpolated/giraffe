@@ -33,7 +33,6 @@ const NotLoggedInNav = (props)=>{
 
 
 const App = (props) =>{
-  console.log(Editor)
   return (
     <div>
       <div>

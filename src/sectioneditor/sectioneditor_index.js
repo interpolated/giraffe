@@ -42,6 +42,10 @@ class SectionEditor extends Component {
 
     // to bind redux store to state use nextprops
         // to bind redux store to state use nextprops
+    componentWillMount(){
+        this.setState(this.props.sectionTypes[this.props.activeSectionType])
+    }
+    
     componentWillReceiveProps(nextProps){
         console.log(nextProps)
         const activeSecType = R.filter(R.propEq('id',nextProps.activeSectionType),nextProps.sectionTypes)
@@ -77,12 +81,14 @@ class SectionEditor extends Component {
             name:'',
             cost:'',
             value:'',
+            efficiency:0,
             color:''
           })
     }
 
   // onChange={_onChange}
-  render(){return (
+  render(){
+    return (
             
           <Row>
             <Col md='3'>
@@ -96,7 +102,7 @@ class SectionEditor extends Component {
                 <form>
             <h4>Active Section Type</h4>  
                 <Row>
-                    <Col md='6'>
+                    <Col md='4'>
                         <FieldGroup
                             // componentClass="text"
                             placeholder="Type"
@@ -106,7 +112,7 @@ class SectionEditor extends Component {
                             label="projectId"
                             value={this.state.name}/>          
                     </Col>
-                    <Col md='6'>
+                    <Col md='4'>
                         <FieldGroup
                             // componentClass="text"
                             placeholder="Color"
@@ -115,6 +121,16 @@ class SectionEditor extends Component {
                             type="text"
                             label="color"
                             value={this.state.color}/>          
+                    </Col>
+                    <Col md='4'>
+                        <FieldGroup
+                            // componentClass="text"
+                            placeholder="Efficiency"
+                            id="efficiency"
+                            name='efficiency'
+                            type="number"
+                            label="efficiency"
+                            value={this.state.efficiency}/>          
                     </Col>
                 </Row>
                 <Row>

@@ -7,17 +7,18 @@ import {connect} from 'react-redux';
 import {Panel,Row,Col,ButtonGroup, Button,Container} from 'react-bootstrap'
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import ReactMap from 'react-mapbox-gl'
-import MapboxDraw from '@mapbox/mapbox-gl-draw';
+// import MapboxDraw from '@mapbox/mapbox-gl-draw';
 
 import {accessToken} from '../constants' 
 
 // import 3rd party libraries
 import R from 'ramda';
 
-// import actions
-import {setActiveSection, sectionActionCreators, setCenter} from '../common/common_actions'
+const MapboxDraw = window.MapboxDraw
 
-console.log(accessToken)
+
+// import actions
+import {setActiveSection, sectionActionCreators, setCenter, setActiveSectionType} from '../common/common_actions'
 
 const Map = ReactMap({
   accessToken
@@ -43,7 +44,7 @@ class Drawmap extends Component {
       // console.log('IT mounted!!!!!!!!!!')
       this.setState({
         center :[ 151.21013774806318, -33.84333797354172],
-        zoom:[12]
+        zoom:[14]
       })
       // this.setState({selectedId:''})
     }
@@ -58,28 +59,23 @@ class Drawmap extends Component {
     
     _onClick = (map, evt) => {
       const selectedId = this.state.draw.getSelectedIds()[0]
-      console.log('waaa')
         if(evt.originalEvent.altKey==true){
-          console.log(evt)
-          console.log(JSON.stringify(evt.lngLat))
           this.props.setCenter(R.values(evt.lngLat))
             // f = dataGetter(evt.lngLat)
           }
-          
           if(evt.originalEvent.shiftKey==true){
             // f = sitePicker(e)
           }
-    
         // if selectedId is new, add geom to state
         // otherwise set the active section to that selectedId
         if(R.contains(selectedId,R.keys(this.props.sections))){
           console.log(selectedId)
+          this.props.setActiveSection(!!selectedId?selectedId:'')
           this.props.updateSection(R.merge(this.state.draw.getSelected().features[0],{id:selectedId}))
-          this.props.setActiveSection(selectedId)
+          // this.props.setActiveSectionType(this.props.sectionTypes[this.props.sections[selectedId].sectionType])
         }else{
-          console.log(selectedId)
+          this.props.setActiveSection(!!selectedId?selectedId:'')
           this.props.createSection(this.state.draw.getSelected().features[0])
-          this.props.setActiveSection(selectedId)
         }
         // console.log(selectedId[0])
     }
@@ -106,10 +102,11 @@ class Drawmap extends Component {
     }
   }
 
-const mapStateToProps = ( {activeSection,sections} ) => {
+const mapStateToProps = ( {activeSection,sections, sectionTypes} ) => {
     return {
       activeSection,
-      sections
+      sections,
+      sectionTypes
     }
   }
   
@@ -120,6 +117,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteSection:sectionActionCreators.deleteSuccess,
     updateSection:sectionActionCreators.updateStart,
     setActiveSection,
+    setActiveSectionType,
     setCenter
   }, dispatch)
 }

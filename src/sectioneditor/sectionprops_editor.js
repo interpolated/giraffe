@@ -15,6 +15,7 @@ import cuid from 'cuid';
 import {sectionActionCreators, setActiveSection, sectionPropsActionCreators} from '../common/common_actions' 
 // import constants
 
+
 import SectionTypeList from './sectiontype_list'
 
 const ifNullThen = (testObjectProp, defaults)=>{
@@ -64,12 +65,12 @@ class SectionPropsEditor extends Component {
       }
 
     _onChange=(e)=>{
-        console.log('this changes it tooooo')
-        console.log({[e.target.id]:e.target.value})
         this.setState({[e.target.id]:e.target.value})
-        this.props.updateSectionProps({...R.merge(this.state,{[e.target.id]:e.target.value}),id:this.props.activeSection})
+        console.log(R.merge(this.state,{[e.target.id]:e.target.value,sectionType:this.props.activeSectionType,id:this.props.activeSection}))
+        this.props.updateSectionProps(R.merge(this.state,{[e.target.id]:e.target.value,sectionType:this.props.activeSectionType,id:this.props.activeSection}))
     }
 
+      
   // onChange={_onChange}
   render(){
     console.log(!!this.props.activeSection)

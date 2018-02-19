@@ -7,7 +7,7 @@ import {Row,Col,ButtonGroup, Button,Container} from 'react-bootstrap'
 import  Viewmap  from "../viewmap/viewmap_index";
 import  Drawmap  from "../drawmap/drawmap_index";
 import  SectionEditor  from "../sectioneditor/sectioneditor_index";
-import AreaReportList from '../report/report_index'
+import Report from '../report/report_index'
 
 const Editor = (props) => {
     return (
@@ -15,7 +15,7 @@ const Editor = (props) => {
         <Row>
             <Col md={6}>
                 <Viewmap/>
-                <AreaReportList/>
+                <Report/>
             </Col>
             <Col md={6}>
                 <Drawmap/>

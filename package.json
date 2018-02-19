@@ -6,7 +6,7 @@
     "gh-pages": "^0.12.0",
     "react-scripts": "0.8.5"
   },
-  "homepage": "ss",
+  "homepage": "https://interpolated.github.io/giraffe",
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.0.4",
     "axios": "^0.15.3",
@@ -20,6 +20,7 @@
     "moment": "^2.17.1",
     "moment-range": "^3.0.2",
     "normalizr": "^3.1.0",
+    "numeral": "^2.0.6",
     "ramda": "^0.23.0",
     "rc-slider": "^6.1.1",
     "react": "^15.4.2",

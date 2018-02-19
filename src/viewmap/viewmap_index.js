@@ -23,7 +23,7 @@ import {accessToken} from '../constants'
 import {dummy_state} from '../common/dummy_data'
 
 
-const style = 'mapbox://styles/mapbox/dark-v9'
+const style = 'mapbox://styles/mapbox/bright-v9'
 
 const Map = ReactMap({
   accessToken
@@ -42,8 +42,8 @@ class Viewmap extends Component {
 
   componentWillMount(){
     this.setState({
-      center :[155.4245403625426,-10.11582550013361],
-      zoom:[4]
+      center :[ 151.21013774806318, -33.84333797354172],
+      zoom:[14]
     })
   }
 
@@ -70,9 +70,9 @@ class Viewmap extends Component {
       // const sectionTypes = dummy_state.sectionTypes;
 
        //set of unique building codes
-       let buildingSet = new Set()
+      let buildingSet = new Set()
        // add each code to the set
-        R.values(sectionProps).map((x)=>{buildingSet.add(x.building)})
+      R.values(sectionProps).map((x)=>{buildingSet.add(x.building)})
       // convert to a list and then for every building add floors etc.
       let buildingList = [...buildingSet]
       
@@ -90,7 +90,14 @@ class Viewmap extends Component {
        R.sort(sortr),
        R.map(filler),
        R.reduce(R.concat,[]),
-       R.addIndex(R.map)(heightAdder),
+       R.addIndex(R.map)((obj, i, arr)=>{
+        // maps over an array of features adding height, base height and color to each property 
+        const k = i
+        arr[i].height = (k+1)*4-0.2
+        arr[i].base_height = k*4
+        arr[i].color = sectionTypes[obj.sectionType].color
+        return arr[i]
+       }),
        R.addIndex(R.map)((item,index,array)=>{
         return {
          type:'feature',
@@ -106,7 +113,6 @@ class Viewmap extends Component {
     return (
       <div className='halfmap'>
         <Map
-
           onClick={_onCLick}
           center={this.state.center}
           pitch={0}
@@ -116,24 +122,24 @@ class Viewmap extends Component {
           style={style}
           containerStyle={mapStyle}
         >
-              <GeoJSONLayer
-                  id="LOADED_GEOJSON"
-                  data={this.sourceUpdater(this.props.sections,this.props.sectionProps,this.props.sectionTypes)}
-                  fillExtrusionPaint={{
-                    'fill-extrusion-color': {
-                      'type': 'identity',
-                      'property': 'color'
-                    },
-                    'fill-extrusion-height': {
-                        'type': 'identity',
-                        'property': 'height'
-                    },
-                    'fill-extrusion-base': {
-                        'type': 'identity',
-                        'property': 'base_height'
-                    }
-                  }}
-                />
+          <GeoJSONLayer
+            id="LOADED_GEOJSON"
+            data={this.sourceUpdater(this.props.sections,this.props.sectionProps,this.props.sectionTypes)}
+            fillExtrusionPaint={{
+              'fill-extrusion-color': {
+                'type': 'identity',
+                'property': 'color'
+              },
+              'fill-extrusion-height': {
+                  'type': 'identity',
+                  'property': 'height'
+              },
+              'fill-extrusion-base': {
+                  'type': 'identity',
+                  'property': 'base_height'
+              }
+              }}
+            />
         </Map>
       </div>
     )
@@ -148,14 +154,6 @@ class Viewmap extends Component {
    return smartArray 
   }
   
-  function heightAdder(obj, i, arr){
-     // maps over an array of features adding height, base height and color to each property 
-     const k = i
-     arr[i].height = (k+1)*4-0.2
-     arr[i].base_height = k*4
-     arr[i].color = "OrangeRed"
-     return arr[i]
-    }
   
   const mapStateToProps = ( {sectionProps,sectionTypes,sections,center} ) => {
     return {
@@ -165,7 +163,6 @@ class Viewmap extends Component {
       center
     }
   }
-  
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
